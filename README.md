@@ -124,5 +124,6 @@ python Online_Payments_Fraud_Detection_Dataset.ipynb
 ## Author
 
 **Vanshika Aggarwal**
-M.Sc. Data Science — Chandigarh University
-[LinkedIn](https://www.linkedin.com/in/vanshika2003) • [GitHub](https://github.com/vanshika2003)
+
+
+[LinkedIn](https://www.linkedin.com/in/vanshika2003)
