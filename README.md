@@ -12,7 +12,7 @@ Online payment fraud causes billions in losses globally every year. This project
 
 ## Dataset
 
-**Source:** PaySim Synthetic Financial Dataset (`opfd.csv`)
+**Source:** PaySim Synthetic Financial Dataset (`opfd.csv`) or download from [Kaggle](https://www.kaggle.com/datasets/ealaxi/paysim1)
 
 | Feature | Description |
 |---|---|
@@ -46,12 +46,12 @@ Raw Data → EDA → Label Encoding → Train/Test Split → Model Training → 
 
 | Model | Train Score | Test Accuracy | F1 Score |
 |---|---|---|---|
-| Random Forest | ~0.97 | **~0.96** | **~0.96** |
-| Decision Tree | ~0.97 | ~0.95 | ~0.95 |
-| K-Nearest Neighbours | — | ~0.93 | ~0.93 |
-| Logistic Regression | — | ~0.91 | ~0.91 |
+| Random Forest | 0.9999 | 0.9987 | 0.9986 |
+| Decision Tree | 1.0000 | 0.9987 | 0.9982 |
+| K-Nearest Neighbours | 0.9988  | 0.8918 | 0.9415 |
+| Logistic Regression | 0.8919 |  0.9987 | 0.9987 |
 
-> ⚠️ **Note on accuracy:** Earlier versions of this project achieved 100% accuracy by accidentally including the balance columns (`oldbalanceOrg`, `newbalanceOrig`, `oldbalanceDest`, `newbalanceDest`) as features. Per the dataset documentation, fraud transactions are cancelled and these columns are zeroed out for fraudulent records — meaning the model was learning "balance = 0 → fraud" rather than genuine patterns. This is **data leakage**. These columns are correctly excluded in this version, giving realistic and honest accuracy scores.
+> ⚠️ **Note on accuracy:** Earlier versions of this project achieved 100% accuracy by accidentally including the balance columns (`oldbalanceOrg`, `newbalanceOrig`, `oldbalanceDest`, `newbalanceDest`) as features. But as per the dataset documentation available on kaggle , fraud transactions are cancelled and these columns are zeroed out for fraudulent records — meaning the model was learning "balance = 0 → fraud" rather than genuine patterns. This is **data leakage**. These columns are correctly excluded in this version, giving realistic and honest accuracy scores.
 
 ---
 
@@ -68,10 +68,12 @@ Raw Data → EDA → Label Encoding → Train/Test Split → Model Training → 
 ## Project Structure
 
 ```
-fraud-detection/
-├── fraud_detection.py     # Main script
+Online-Payments-Fraud-Detection-/
+├── Online_Payments_Fraud_Detection_Dataset.py     # Main script
 ├── requirements.txt       # Python dependencies
 ├── .gitignore
+├── .gitattributes
+├── opfd.csv              #dataset 
 └── README.md
 ```
 
@@ -81,8 +83,8 @@ fraud-detection/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/vanshika2003/fraud-detection.git
-cd fraud-detection
+git clone https://github.com/vanshika-data-lab/Online-Payments-Fraud-Detection-.git
+cd Online-Payments-Fraud-Detection-
 
 # 2. Install dependencies
 pip install -r requirements.txt
@@ -91,7 +93,7 @@ pip install -r requirements.txt
 # Rename it to opfd.csv or update DATA_PATH in the script
 
 # 4. Run
-python fraud_detection.py
+python Online_Payments_Fraud_Detection_Dataset.ipynb
 ```
 
 ---
@@ -101,7 +103,7 @@ python fraud_detection.py
 - The dataset is highly imbalanced — fraud cases are less than 1% of all transactions
 - Balance columns (`oldbalanceOrg` etc.) were deliberately excluded to prevent data leakage — per the dataset documentation, these are zeroed out for fraud transactions, which would give the model an unfair shortcut
 - Legitimate features used: `step`, `type` (encoded), `amount`
-- Random Forest performs best at ~96% accuracy on clean, leakage-free features
+- Random Forest, KNN, Decision Tree performs best at ~99.87% accuracy on clean, leakage-free features
 - TRANSFER and CASH-OUT transaction types are most associated with fraudulent activity
 - Logistic Regression underperforms due to the non-linear nature of fraud patterns
 
